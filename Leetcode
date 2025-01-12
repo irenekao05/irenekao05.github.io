@@ -1,0 +1,16 @@
+#### CONTAINS DUPLICATE ####
+
+class Solution(object):
+    def containsDuplicate(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: bool
+        """
+        hSet = set()
+        for n in nums:
+            if n not in hSet:
+                hSet.add(n)
+            else:
+                return True
+        
+        return False
