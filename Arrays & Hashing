@@ -1,19 +1,85 @@
 #### CONTAINS DUPLICATE ####
+def containsDuplicate(self, nums):
+    """
+    :type nums: List[int]
+    :rtype: bool
+    """
+    hSet = set()
+    for n in nums:
+        if n not in hSet:
+            hSet.add(n)
+        else:
+            return True
+    
+    return False
 
-class Solution(object):
-    def containsDuplicate(self, nums):
+
+
+#### VALID ANAGRAM ####
+def isAnagram(self, s, t):
+    """
+    :type s: str
+    :type t: str
+    :rtype: bool
+    """
+
+    # Hashmap 
+    hMap1 = {}
+    hMap2 = {}
+
+    for c in s: 
+        if c not in hMap1:
+            hMap1[c] = 1
+        else:
+            hMap1[c] += 1
+    for c in t:
+        if c not in hMap2:
+            hMap2[c] = 1
+        else:
+            hMap2[c] += 1
+    
+    return hMap1 == hMap2
+
+    # Sorting
+    str1 = sorted(s)
+    str2 = sorted(t)
+    return str1 == str2
+
+
+
+#### TWO SUM ####
+def twoSum(self, nums, target):
         """
         :type nums: List[int]
-        :rtype: bool
+        :type target: int
+        :rtype: List[int]
         """
-        hSet = set()
-        for n in nums:
-            if n not in hSet:
-                hSet.add(n)
-            else:
-                return True
+        # Hashmap 
+        hMap = {}
         
-        return False
+        for i in range(len(nums)):
+            num2 = target - nums[i]
+            if num2 in hMap:
+                return [i, hMap[num2]]
+            else:
+                hMap[nums[i]] = i
+        
+        # Sorting - better time complexity, worse space complexity 
+        numberList = []
+        for i in range(len(nums)):
+            numberList.append((nums[i] , i))
+        
+        numberList.sort()
+
+        i, j = 0, len(nums) - 1
+        while i < j:
+            total = numberList[i][0] + numberList[j][0]
+            if total == target: 
+                return [numberList[i][1], numberList[j][1]]
+            elif total < target: 
+                i += 1
+            else:
+                j -= 1
 
 
 
